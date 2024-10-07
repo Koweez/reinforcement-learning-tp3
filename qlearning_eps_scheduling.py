@@ -47,7 +47,7 @@ class QLearningAgentEpsScheduling(QLearningAgent):
         self.epsilon = max(
             self.epsilon_end,
             self.epsilon_start
-            + (self.epsilon_end - self.epsilon_start)
+            - (self.epsilon_start - self.epsilon_end)
             * self.timestep
             / self.epsilon_decay_steps
         )

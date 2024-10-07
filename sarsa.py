@@ -47,6 +47,10 @@ class SarsaAgent:
         """
         value = 0.0
         # BEGIN SOLUTION
+        possible_v = []
+        for action in self.legal_actions:
+            possible_v.append(self.get_qvalue(state, action))
+        value = np.max(possible_v)
         # END SOLUTION
         return value
 
@@ -61,6 +65,12 @@ class SarsaAgent:
         """
         q_value = 0.0
         # BEGIN SOLUTION
+        q_value = self.get_qvalue(state, action)
+        next_action = self.get_best_action(next_state)
+        next_q_value = self.get_qvalue(next_state, next_action)
+        td_target = reward + self.gamma * next_q_value
+        td_error = td_target - q_value
+        q_value += self.learning_rate * td_error
         # END SOLUTION
 
         self.set_qvalue(state, action, q_value)
@@ -83,6 +93,10 @@ class SarsaAgent:
         action = self.legal_actions[0]
 
         # BEGIN SOLUTION
+        if random.uniform(0, 1) < 0.1:
+            action = random.choice(self.legal_actions)
+        else:
+            action = self.get_best_action(state)
         # END SOLUTION
 
         return action
