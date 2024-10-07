@@ -61,7 +61,7 @@ def play_and_train(env: gym.Env, agent: QLearningAgent, t_max=int(200)) -> float
         total_reward += r
         
         if done:
-            s, _ = env.reset()
+            break
         else:
             s = next_s
             
