@@ -104,9 +104,9 @@ for i in range(1000):
 assert np.mean(rewards[-100:]) > 0.0
 # TODO: créer des vidéos de l'agent en action
 
-env_video = gym.wrappers.RecordVideo(env_video, "videos/taxi_qlearning_eps_scheduling.mp4")
+env_video = gym.wrappers.RecordVideo(env, "videos/taxi_qlearning_eps_scheduling.mp4")
 env_video.start_video_recorder()
-play_and_train(env, agent)
+play_and_train(env_video, agent)
 env_video.close_video_recorder()
 env_video.close()
 
@@ -126,7 +126,7 @@ for i in range(1000):
         
 assert np.mean(rewards[-100:]) > 0.0
 
-env_video = gym.wrappers.RecordVideo(env_video, "videos/taxi_sarsa.mp4")
+env_video = gym.wrappers.RecordVideo(env, "videos/taxi_sarsa.mp4")
 env_video.start_video_recorder()
 play_and_train(env, agent)
 env_video.close_video_recorder()
