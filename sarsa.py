@@ -59,16 +59,14 @@ class SarsaAgent:
     ):
         """
         You should do your Q-Value update here (s'=next_state):
-           TD_target(s') = R(s, a) + gamma * V(s')
+           TD_target(s') = R(s, a) + gamma * (s')V
            TD_error(s', a) = TD_target(s') - Q(s, a)
            Q_new(s, a) := Q(s, a) + alpha * TD_error(s', a)
         """
         q_value = 0.0
         # BEGIN SOLUTION
         q_value = self.get_qvalue(state, action)
-        next_action = self.get_best_action(next_state)
-        next_q_value = self.get_qvalue(next_state, next_action)
-        td_target = reward + self.gamma * next_q_value
+        td_target = reward + self.gamma * self.get_value(next_state)
         td_error = td_target - q_value
         q_value += self.learning_rate * td_error
         # END SOLUTION
